@@ -105,6 +105,7 @@ class TimerService : Service() {
         super.onDestroy()
 
         Log.d("TimerService status", "Destroyed")
+
     }
 
 
