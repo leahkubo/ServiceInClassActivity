@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
         findViewById<Button>(R.id.startButton).setOnClickListener {
-            timerBinder?.start(100, null)
+            timerBinder?.start(100, handler)
         }
 
         findViewById<Button>(R.id.pauseButton).setOnClickListener {
