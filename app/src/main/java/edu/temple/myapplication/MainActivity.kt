@@ -76,7 +76,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId){
-            R.id.action_start_timer -> timerBinder?.start(100, handler)
+            R.id.action_start_timer -> {
+                val editTextNum = editText.text.toString()
+                try {
+                    editTextNum.toInt()
+                    timerBinder?.start(editTextNum.toInt(), handler)
+                } catch (e: Exception){
+                    Log.d("Conversion Error", e.toString())
+                }
+            }
 
             R.id.action_pause_timer -> timerBinder?.pause()
 
