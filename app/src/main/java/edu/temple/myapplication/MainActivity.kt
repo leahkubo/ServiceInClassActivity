@@ -8,13 +8,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
     var timerBinder: TimerService.TimerBinder? = null
+
+    private lateinit var editText: EditText
 
     val handler: Handler = Handler(Looper.getMainLooper()){
         true
@@ -40,10 +44,17 @@ class MainActivity : AppCompatActivity() {
             BIND_AUTO_CREATE
         )
 
-
+        editText = findViewById(R.id.timerEditText)
 
         findViewById<Button>(R.id.startButton).setOnClickListener {
-            timerBinder?.start(100, handler)
+            val editTextNum = editText.text.toString()
+            try {
+                editTextNum.toInt()
+                timerBinder?.start(editTextNum.toInt(), handler)
+            } catch (e: Exception){
+                Log.d("Conversion Error", e.toString())
+            }
+
         }
 
         findViewById<Button>(R.id.pauseButton).setOnClickListener {
